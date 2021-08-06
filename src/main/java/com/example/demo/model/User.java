@@ -1,9 +1,6 @@
 package com.example.demo.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,14 +11,25 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import java.time.Instant;
 
-@Data
+@Getter
+@Setter
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
+
+    public User(Long userId, String username, String password, String email, Instant created, boolean enabled) {
+        this.userId = userId;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.created = created;
+        this.enabled = enabled;
+    }
+
+    public User() {
+    }
 
     @NotBlank(message = "Username is required")
     private String username;
@@ -35,4 +43,6 @@ public class User {
 
     private Instant created;
     private boolean enabled;
+
+
 }

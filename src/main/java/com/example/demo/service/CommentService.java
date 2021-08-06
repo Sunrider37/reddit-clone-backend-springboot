@@ -58,4 +58,12 @@ public class CommentService {
                 new UsernameNotFoundException("User not found"));
         return commentRepository.findAllByUser(user).stream().map(commentMapper::mapToDto).collect(Collectors.toList());
     }
+
+    public boolean containsSwearWords(String comment) throws SpringRedditException {
+        if(comment.contains("shit")){
+            throw new SpringRedditException("The comment contains unacceptable language");
+
+        }
+        return false;
+    }
 }
